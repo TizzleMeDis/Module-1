@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 4 HTML Assignment</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column; /* These 3 lines provide some spacing for all the content that I put here*/
+            gap: 2rem;
+        }
+        input {
+            margin: 8px 4px 8px 4px;
+            display: block;
+        }
+        .navigation-bar {
+            margin: 0;
+            list-style-type: none;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .links {
+            display: flex; 
+            margin: 4px; 
+            padding: 4px;
+        }
+        .link {
+            padding: 4px;
+            margin: 0 4px 0 4px;
+        }
+        .logo {                             
+            width: 50px;
+            background-color: bisque;
+            border-radius: 50%;
+            overflow:visible;   /* overflow of svg was getting cut of from radius.*/
+            padding: 8px;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul class="navigation-bar"> <!-- The links don't have desinations yet but when this is built out more. It will have something to go to-->
+            <section>
+                <li><a href="#"><img src="./images/house-svgrepo-com.svg" class="logo" style="background-color: bisque; border-radius: 50%;"/></a></li>
+            </section>
+            <section class="links">
+                <li class="link"><a href="#Home">Home</a></li>
+                <li class="link"><a href="#About">About</a></li>
+                <li class="link"><a href="#Contact">Contact</a></li>
+            </section>
+        </ul>
+    </nav>
+
+    <img src="https://placehold.co/300x200" alt="Placeholder image" width="300"/>
+
+    <table border="1" style="width: 400px;"> <!-- Links are just to the items on the gucci store.-->
+        <tr>
+            <th>Product Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+        </tr>
+        <tr>
+            <td><a href="https://www.gucci.com/us/en/pr/men/accessories-for-men/belts-for-men/casual-belts-for-men/reversible-belt-with-interlocking-g-buckle-p-812273AAEB41000">Gucci Belt - Reversible belt with Interlocking G buckle</a></td>
+            <td>$635</td>
+            <td>4</td>
+        </tr>
+        <tr>
+            <td><a href="https://www.gucci.com/us/en/pr/women/shoes-for-women/slides-for-women/womens-round-interlocking-g-sandal-p-820860BNC006207">Gucci Flip Flop - Women's Round Interlocking G sandal</a></td>
+            <td>$820</td>
+            <td>8</td>
+        </tr>
+        <tr>
+            <td><a href="https://www.gucci.com/us/en/pr/children/boys/bags-backpacks-for-boys/peter-rabbit-x-gucci-belt-bag-p-502095FACZL8462">Gucci Fanny Pack - Peter Rabbit™ x Gucci belt bag</a></td>
+            <td>$530</td>
+            <td>3</td>
+        </tr>
+    </table>
+
+    <form action="/submit" method="post">
+        <label for="name">Name:</label>
+        <input type="text" id="name" placeholder="Enter your name"/>
+        <label for="email">Email:</label>
+        <input type="text" id="email" placeholder="Enter your email"/>
+        <label for="message">Message:</label>
+        <input type="textArea" id="message" placeholder="Enter your message"/>
+        <p>Where did you hear about us?</p>
+        <ul style="list-style-type:none">
+            <li><input style="display: inline;" type="radio" name="survey" value="google"/> <label for="survey">Google</label></li>
+            <li><input style="display: inline;" type="radio" name="survey" value="facebook"/> <label for="survey">Facebook</label></li>
+            <li><input style="display: inline;" type="radio" name="survey" value="instagram"/> <label for="survey">Instagram</label></li>
+            <li><input style="display: inline;" type="radio" name="survey" value="tiktok"/> <label for="survey">Tiktok</label></li>
+            <li><input style="display: inline;" type="radio" name="survey" value="other"/> <label for="survey">Other</label></li>
+        </ul>
+        
+
+        <input type="button" id="submit" value="Submit Information"/>
+    </form>
+</body>
+</html>
