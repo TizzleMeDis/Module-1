@@ -1,5 +1,4 @@
 :root {
-
     /*Coloring*/
     --background-color: #f2f3ae;
     --secondary-color: #edd382;
@@ -19,28 +18,40 @@
 *, *::after, *::before {
     margin: 0px;
     padding: 0px;
-    box-sizing: border-box;
 }
 
 body {
+    box-sizing: border-box;
     font-family:Arial, Helvetica, sans-serif;
     height: 3000px;
     position: relative;
     top: 0;
     color: var(--text-color);
     background-color: var(--background-color);
-
 }
 
-.nav-container {
+.nav-container { /* Keeps everything at the top of the page */
     position: sticky;
     top: 0;
-    padding: 16px;
+    padding: clamp(5vh, 2rem, 5rem);
     background-color: var(--secondary-color);
     z-index: 1;
 }
 
-/* For pc/laptop displays */
+.home, .about, .services, .contact {
+    background-color: var(--accent-color);
+    color: var(--text-color);
+    border-radius: 15%;
+    box-shadow: 3px 3px 3px black;
+    font-size: clamp(1rem,1.5vw,2.5rem);
+    text-decoration: none;
+    padding: 8px;
+    margin: 0 1vw;
+
+    transition: 500ms ease;
+}
+/*-----------------------------------------------------------------------------------------------*/
+/*--------------------------------- For pc/laptop displays --------------------------------------*/
 @media screen and (min-width:601px) {
     .hamburger-menu {
         display: none;
@@ -55,26 +66,12 @@ body {
         padding: 8px;
     }
 
-    .home {
+    .logo {
         flex: 3
     }
-    
-    a {
-        background-color: var(--accent-color);
-        color: var(--text-color);
-        border-radius: 15%;
-        box-shadow: 3px 3px 3px black;
-        font-size: larger;
-        text-decoration: none;
-        padding: 8px;
-        margin-left: 4px;
-        margin-right: 4px;
-    
-        transition: 500ms ease;
-    }
 }
-
-/* For small screens/ phone displays*/
+/*-----------------------------------------------------------------------------------------------*/
+/*---------------------------------- For small screens/ phone displays --------------------------*/
 @media screen and (max-width: 600.99px) {
     .menu-bar {
         display: none;
@@ -87,12 +84,24 @@ body {
 
         list-style-type: none;
     }
+
     .sidebar {
-        background-color: rgba(134, 120, 66, 0.5);
+        background-color: var(--secondary-color);
         position: fixed;
-        left: 85%;
+        right: 3vw;
         max-width: fit-content;
+        padding: 0 8px;
         opacity: 100%;
+        z-index: 2;
+        
+    }
+
+    .side-links {
+        list-style-type: none;
+    }
+    .side-link {
+        margin: 1rem 0;
+        padding: 1rem 0;
     }
 
     .sidebar div {
@@ -105,22 +114,11 @@ body {
         transition: padding var(--animation-timing);
     }
 
-    .hamburger-menu:has(.drop-down-box:checked) + .sidebar {
+    .hamburger-menu:has(.drop-down-box:checked) .sidebar { /* make sure to make side menu visible when users touch hamburger menu */
         opacity: 0%;
     }
-    /* .link {
-        background-color: var(--accent-color);
-        color: var(--text-color);
-        border-radius: 15%;
-        box-shadow: 3px 3px 3px black;
-        font-size: larger;
-        text-decoration: none;
-        padding: 8px;
-        margin-left: 4px;
-        margin-right: 4px;
-    } */
 
-    .drop-down-box {
+    .drop-down-box { /* corrects the positioning of the hamburger bars */
         display: flex;
         flex-direction: column;
         gap: var(--drop-down-gap);
@@ -131,17 +129,17 @@ body {
 
     .drop-down-box::before,
     .drop-down-box::after,
-    .drop-down-box input {
+    .drop-down-box input { /* makes the hamburger turn into an 3 lines stacked*/
         content: "";
         width: var(--bar-width);
         height: var(--bar-height);
-        background-color: #f4442e;
+        background-color: var(--accent2-color);
         border-radius: 9999px;
 
         transition: opacity var(--animation-timing), width var(--animation-timing);
     }
 
-    .drop-down-box input {
+    .drop-down-box input { /* removes checkbox and makes cursor a finger */
         appearance: none;
         padding: 0;
         margin: 0;
@@ -150,25 +148,22 @@ body {
     }
 
     .drop-down-box:has(input:checked)::before {
-        transform: rotate(45deg) translateY(calc(var(--bar-height) / -2));
-        /* rotate: 45deg;
-        translate: 0 calc(var(--bar-height) / 2); */
-
+        rotate: 45deg;
+        transform: translate(0 -50px);
     }
     .drop-down-box:has(input:checked)::after {
         transform: rotate(-45deg) translateY(calc(var(--bar-height) / 2));
-
         /* rotate: -45deg;
         translate: 0 calc(var(--bar-height) / 2); */
-
     }
-
-    .hamburger-menu input:checked {
+    
+    .hamburger-menu input:checked { /* makes middle bar dissappear when clicked */
         opacity: 0;
         width: 0;
-    }
+      }
 }
-
+/*-----------------------------------------------------------------------------------------------*/
+/*-------------------------------------- Loading animation --------------------------------------*/
 .loading {
     height: 50px;
     width: 50px;
