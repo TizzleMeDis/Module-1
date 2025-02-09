@@ -38,7 +38,7 @@ body {
     z-index: 1;
 }
 
-.home, .about, .services, .contact {
+.home {
     background-color: var(--accent-color);
     color: var(--text-color);
     border-radius: 15%;
@@ -66,6 +66,19 @@ body {
         padding: 8px;
     }
 
+    .about, .services, .contact {
+        background-color: var(--accent-color);
+        color: var(--text-color);
+        border-radius: 15%;
+        box-shadow: 3px 3px 3px black;
+        font-size: clamp(1rem,1.5vw,2.5rem);
+        text-decoration: none;
+        padding: 8px;
+        margin: 0 1vw;
+    
+        transition: 500ms ease;
+    }
+
     .logo {
         flex: 3
     }
@@ -78,11 +91,17 @@ body {
     }
 
     .hamburger-menu {
+        --x-width: calc(var(--hamburger-height) * 1.41421356237); /* height of hamburger lines * sqrt(2) | obtains hypotenuse */
+
         display: flex;
         flex-direction: row;
         justify-content:space-between;
-
+        align-items: center;
         list-style-type: none;
+    }
+
+    .toggle {
+        padding: .5rem 1rem;
     }
 
     .sidebar {
@@ -90,32 +109,37 @@ body {
         position: fixed;
         right: 3vw;
         max-width: fit-content;
-        padding: 0 8px;
-        opacity: 100%;
+        padding: 0 0;
+        margin: 0 0;
+        visibility: visible;
+
+        text-align: center;
         z-index: 2;
         
     }
 
-    .side-links {
+    .side-links { /* container for unordered list */
         list-style-type: none;
     }
-    .side-link {
-        margin: 1rem 0;
+
+    .side-link { /* links for side menu*/
         padding: 1rem 0;
+
+        border: 2px solid black;
+        border-radius: 5%;
     }
 
-    .sidebar div {
-        padding: 8px;
-        border: 2px solid rgba(134, 108, 66, 1)
+    .sidebar a {
+        text-decoration: none;
     }
-    .sidebar div:hover {
-        padding: 10px;
-        border: 2px solid rgba(134, 108, 66, 0.8);
-        transition: padding var(--animation-timing);
+/* ===== here is a problem | NOT TRANSFORMING ===== */
+    .sidebar a:hover {
+        transform: scale(1.1) translateX(10px);
+        transition: transform var(--animation-timing);
     }
-
+/* ===== here is a problem | NOT TARGETING CORRECT TAG ===== */
     .hamburger-menu:has(.drop-down-box:checked) .sidebar { /* make sure to make side menu visible when users touch hamburger menu */
-        opacity: 0%;
+        visibility: hidden;
     }
 
     .drop-down-box { /* corrects the positioning of the hamburger bars */
@@ -127,6 +151,7 @@ body {
         cursor: pointer;
     }
 
+/* ===== here is a problem | NOT ANIMATING ::BEFORE AND ::AFTER ===== */
     .drop-down-box::before,
     .drop-down-box::after,
     .drop-down-box input { /* makes the hamburger turn into an 3 lines stacked*/
@@ -147,14 +172,16 @@ body {
         pointer-events: none;
     }
 
-    .drop-down-box:has(input:checked)::before {
-        rotate: 45deg;
-        transform: translate(0 -50px);
+/* ===== here is a problem | NOT MOVING BAR IN CORRECT SPOT ===== */
+    .drop-down-box:has(input:checked)::before { /* makes top bar angle into x*/
+        transform: rotate(45deg) translate(0, calc(var(--bar-height)/2));
+        transition: transform var(--animation-timing);
+        
     }
-    .drop-down-box:has(input:checked)::after {
-        transform: rotate(-45deg) translateY(calc(var(--bar-height) / 2));
-        /* rotate: -45deg;
-        translate: 0 calc(var(--bar-height) / 2); */
+/* ===== here is a problem | NOT MOVING BAR IN CORRECT SPOT ===== */
+    .drop-down-box:has(input:checked)::after { /* makes bottom bar angle into x*/
+        transform: rotate(-45deg) translate(0, calc(var(--bar-height)/2));
+        transition: transform var(--animation-timing);
     }
     
     .hamburger-menu input:checked { /* makes middle bar dissappear when clicked */
