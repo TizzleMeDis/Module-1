@@ -33,7 +33,7 @@ body {
 .nav-container { /* Keeps everything at the top of the page */
     position: sticky;
     top: 0;
-    padding: clamp(5vh, 2rem, 5rem);
+    padding: clamp(5vh, 2rem, 3rem);
     background-color: var(--secondary-color);
     z-index: 1;
 }
@@ -43,7 +43,7 @@ body {
     color: var(--text-color);
     border-radius: 15%;
     box-shadow: 3px 3px 3px black;
-    font-size: clamp(1rem,1.5vw,2.5rem);
+    font-size: clamp(1rem,2rem,4rem);
     text-decoration: none;
     padding: 8px;
     margin: 0 1vw;
@@ -71,7 +71,7 @@ body {
         color: var(--text-color);
         border-radius: 15%;
         box-shadow: 3px 3px 3px black;
-        font-size: clamp(1rem,1.5vw,2.5rem);
+        font-size: clamp(1rem,2rem,4rem);
         text-decoration: none;
         padding: 8px;
         margin: 0 1vw;
