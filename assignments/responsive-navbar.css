@@ -1,14 +1,25 @@
 :root {
+
+    /*Coloring*/
     --background-color: #f2f3ae;
     --secondary-color: #edd382;
     --accent-color: #fc9e4f;
     --accent2-color: #f4442e;
     --text-color: #020122;
+    /*Sizing*/
+    --bar-width: 60px;
+    --bar-height: 8px;
+    --drop-down-gap: 6px;
+    --hamburger-height: calc(var(--bar-height) * 3 + var(--hamburger-gap) * 2);
+    /*Animation*/
+    --animation-timing: 300ms ease-in-out;
+
 }
 
-* {
+*, *::after, *::before {
     margin: 0px;
     padding: 0px;
+    box-sizing: border-box;
 }
 
 body {
@@ -21,21 +32,29 @@ body {
 
 }
 
-@media screen and (max-width: 600px) {
-    .nav-container {
-        position: sticky;
-        top: 0;
-        padding: 16px;
-        background-color: var(--secondary-color);
-        z-index: 1;
+.nav-container {
+    position: sticky;
+    top: 0;
+    padding: 16px;
+    background-color: var(--secondary-color);
+    z-index: 1;
+}
+
+/* For pc/laptop displays */
+@media screen and (min-width:601px) {
+    .hamburger-menu {
+        display: none;
     }
-    
-    .links {
+    .sidebar {
+        display: none;
+    }
+    .menu-bar {
         list-style-type: none;
         display: flex;
         flex-direction: row;
+        padding: 8px;
     }
-    
+
     .home {
         flex: 3
     }
@@ -53,76 +72,101 @@ body {
     
         transition: 500ms ease;
     }
-    
-    a:hover {
-        background-color: var(accent2-color);
-        scale: 2;
+}
+
+/* For small screens/ phone displays*/
+@media screen and (max-width: 600.99px) {
+    .menu-bar {
+        display: none;
     }
-    
-    .loading {
-        height: 50px;
-        width: 50px;
-        border: 4px solid var(--accent2-color);
-        border-radius: 4px;
-        box-shadow: 0 0 8px var(--accent2-color), 0 0 8px var(--accent2-color) inset;
-        position: relative;
-        top: 40vh;
-        left: 50%;
-    
-        animation: 2s loading ease-in-out infinite;
+
+    .hamburger-menu {
+        display: flex;
+        flex-direction: row;
+        justify-content:space-between;
+
+        list-style-type: none;
     }
-    
-    @keyframes loading {
-        0% {
-            transform: rotateX(0) rotateY(0) rotateZ(0);
-        }
-        33% {
-            transform: rotateX(180deg) rotateY(0) rotateZ(0);
-        }
-        67%{
-            transform: rotateX(180deg) rotateY(180deg) rotateZ(0);
-        }
-        100%{
-            transform: rotateX(180deg) rotateY(180deg) rotateZ(180deg);
-        }
-    } 
-}
+    .sidebar {
+        background-color: rgba(134, 120, 66, 0.5);
+        position: fixed;
+        left: 85%;
+        max-width: fit-content;
+        opacity: 100%;
+    }
 
-.nav-container {
-    position: sticky;
-    top: 0;
-    padding: 16px;
-    background-color: var(--secondary-color);
-    z-index: 1;
-}
+    .sidebar div {
+        padding: 8px;
+        border: 2px solid rgba(134, 108, 66, 1)
+    }
+    .sidebar div:hover {
+        padding: 10px;
+        border: 2px solid rgba(134, 108, 66, 0.8);
+        transition: padding var(--animation-timing);
+    }
 
-.links {
-    list-style-type: none;
-    display: flex;
-    flex-direction: row;
-}
+    .hamburger-menu:has(.drop-down-box:checked) + .sidebar {
+        opacity: 0%;
+    }
+    /* .link {
+        background-color: var(--accent-color);
+        color: var(--text-color);
+        border-radius: 15%;
+        box-shadow: 3px 3px 3px black;
+        font-size: larger;
+        text-decoration: none;
+        padding: 8px;
+        margin-left: 4px;
+        margin-right: 4px;
+    } */
 
-.home {
-    flex: 3
-}
+    .drop-down-box {
+        display: flex;
+        flex-direction: column;
+        gap: var(--drop-down-gap);
 
-a {
-    background-color: var(--accent-color);
-    color: var(--text-color);
-    border-radius: 15%;
-    box-shadow: 3px 3px 3px black;
-    font-size: larger;
-    text-decoration: none;
-    padding: 8px;
-    margin-left: 4px;
-    margin-right: 4px;
+        z-index: 2;
+        cursor: pointer;
+    }
 
-    transition: 500ms ease;
-}
+    .drop-down-box::before,
+    .drop-down-box::after,
+    .drop-down-box input {
+        content: "";
+        width: var(--bar-width);
+        height: var(--bar-height);
+        background-color: #f4442e;
+        border-radius: 9999px;
 
-a:hover {
-    background-color: var(accent2-color);
-    scale: 2;
+        transition: opacity var(--animation-timing), width var(--animation-timing);
+    }
+
+    .drop-down-box input {
+        appearance: none;
+        padding: 0;
+        margin: 0;
+        outline: none;
+        pointer-events: none;
+    }
+
+    .drop-down-box:has(input:checked)::before {
+        transform: rotate(45deg) translateY(calc(var(--bar-height) / -2));
+        /* rotate: 45deg;
+        translate: 0 calc(var(--bar-height) / 2); */
+
+    }
+    .drop-down-box:has(input:checked)::after {
+        transform: rotate(-45deg) translateY(calc(var(--bar-height) / 2));
+
+        /* rotate: -45deg;
+        translate: 0 calc(var(--bar-height) / 2); */
+
+    }
+
+    .hamburger-menu input:checked {
+        opacity: 0;
+        width: 0;
+    }
 }
 
 .loading {
